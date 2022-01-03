@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蓝鲸</title>
+    <style>
+        html,
+        body,
+        ul,
+        li,
+        img,
+        a,
+        p,
+        div,
+        form,
+        input {
+
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino", STHeiti, "Microsoft YaHei", sans-serif;
+        }
+
+        @font-face {
+            font-family: YuppySC;
+            src: url("YuppySC-Regular.otf");
+        }
+
+        @font-face {
+            font-family: MyriadPro;
+            src: url("MyriadArabic.ttc");
+        }
+
+        
+        @font-face {
+            font-family: Hiragino;
+            src: url("HiraginoSansGB.ttc");
+        }
+
+        @font-face {
+            font-family: Lantinghei;
+            src: url("Lantinghei.ttc");
+        }
+
+        body {
+            padding-top: 20px;
+        }
+
+        .header {
+            padding: 0 0 0 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header .logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        .header .logo img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .content {
+            width: calc(100% - 50px);
+            padding-left: 10px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .content .title {
+            width: 100%;
+            font-family: YuppySC;
+            font-weight: 700;
+            color: #000000;
+            line-height: 30px;
+        }
+
+        .content .desc {
+            width: 100%;
+            display: flex;
+        }
+
+        .content .desc .item {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        .content .desc .item img {
+            width: 18px;
+            height: 20px;
+        }
+
+        .content .desc .item div {
+            padding-left: 5px;
+            font-size: 10px;
+            font-family: Lantinghei;
+            font-weight: 700;
+        }
+
+        .examination {
+            margin-top: 20px;
+            font-family: Hiragino;
+            font-weight: 400;
+            color: #000100;
+            font-size: 18px;
+        }
+
+        .examination .info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+
+        .examination .info img {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+        }
+
+        .approved-amount {
+            margin: 0 auto;
+            height: 58px;
+            width: 70%;
+            background-image: url(./4.jpg);
+            background-size: contain;
+            text-align: center;
+            position: relative;
+            line-height: 68px;
+        }
+
+        .examination .approved-amount .first {
+            font-size: 70px;
+            font-family: MyriadPro;
+            font-weight: 700;
+            color: #3D4CDA;
+            margin-right: 3px;
+        }
+
+        .examination .approved-amount .last {
+            font-size: 18px;
+            font-family: MyriadPro;
+            font-weight: 700;
+            color: #3D4CDA;
+            position: absolute;
+            bottom: -16px;
+        }
+
+        .click {
+            height: 45px;
+            line-height: 45px;
+            width: 82%;
+            margin: 33px auto 0 auto;
+            background: #3D4CDA;
+            box-shadow: 0px 9px 13px 0px rgba(61, 76, 218, 0.49);
+            border-radius: 76px;
+            text-align: center;
+            color: #FFFEFE;
+            font-family: Lantinghei;
+            font-weight: 600;
+            letter-spacing: 3px;
+        }
+
+        .server {
+            background: #ffffed;
+            width: 90%;
+            height: 20px;
+            margin: 30px auto 0 auto;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+        }
+
+        .server .pic img {
+            display: block;
+            width: 23px;
+            height: 14px;
+        }
+
+        .server .txt {
+            /* font-weight: 400; */
+            color: #000001;
+            font-size: 14px;
+            padding-left: 8px;
+            line-height: 14px;
+        }
+
+        .server .number {
+            /* font-weight: 400; */
+            color: #3D4CDA;
+            font-size: 14px;
+            padding-left: 8px;
+            line-height: 14px;
+            font-weight: 700;
+        }
+
+        .list {
+            padding: 0 15px;
+            margin-top: 20px;
+        }
+
+        /* tj */
+        .list .item {
+            width: 100%;
+            padding: 6px;
+            background: #F3F3F3;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.16);
+            border-radius: 8px;
+            margin-bottom: 13px;
+            position: relative;
+        }
+
+        .list .item .tj {
+            position: absolute;
+            top: -5px;
+            right: 10px;
+            width: 21px;
+            height: 16px;
+        }
+
+        .item-hader {
+            display: flex;
+            border-bottom: 1px solid #e6e6e6;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        .item-info {
+            margin-left: 10px;
+            flex: 1;
+        }
+
+        .item-info .first {
+            font-family: Hiragino;
+            color: #000000;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .item-info .last {
+            font-family: Hiragino;
+            font-weight: normal;
+            color: #C3C3C3;
+            font-size: 12px;
+        }
+
+
+        .item-logo {
+            width: 40px;
+        }
+
+        .list .item img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .item-click {
+            height: 24px;
+            background: #3D4CDA;
+            border-radius: 5px;
+            font-family: Hiragino;
+            font-weight: normal;
+            font-size: 14px;
+            color: #FFFFFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 8px;
+            position: absolute;
+            bottom: 10px;
+            right: 0;
+        }
+
+        .footer {
+            display: flex;
+            padding-top: 10px;
+        }
+
+        .footer .start,
+        .footer .middle,
+        .footer .end {
+            width: calc(100% / 3);
+        }
+
+        .footer .start .t {
+            color: #FF0000;
+            font-family: PingFang SC;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .footer .start .f,
+        .footer .middle .f,
+        .footer .end .f {
+            font-family: Hiragino;
+            font-weight: normal;
+            color: #949494;
+            font-size: 14px;
+        }
+
+        .footer .middle .t,
+        .footer .end .t {
+            font-family: PingFang SC;
+            font-weight: 600;
+            color: #565656;
+            font-size: 14px;
+        }
+
+        .footer .middle {
+            text-align: center;
+        }
+
+        .footer .end {
+            text-align: right;
+        }
+    </style>
+    <script>
+
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="./1.png" alt="">
+        </div>
+        <div class="content">
+            <div class="title">贷款，就用鲸优享</div>
+            <div class="desc">
+                <div class="item">
+                    <img src="./2.png" alt="">
+                    <div>产品低息</div>
+                </div>
+                <div class="item">
+                    <img src="./8.jpg" alt="">
+                    <div>产品低息</div>
+                </div>
+                <div class="item">
+                    <img src="./9.jpg" alt="">
+                    <div>产品低息</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="examination">
+        <div class="info">
+            <img src="./3.png" alt="">
+            <div>
+                审核成功，获得初审额度:
+            </div>
+        </div>
+        <div class="approved-amount">
+            <span class="first">8500</span><span class="last">元</span>
+        </div>
+        <div class="click">
+            免息提现
+        </div>
+    </div>
+    <div class="server">
+        <div class="pic">
+            <img src="./6.png" alt="">
+        </div>
+        <div class="txt">
+            客服电话:
+        </div>
+        <div class="number">
+            18810889088
+        </div>
+    </div>
+    <div class="list">
+        <div class="item">
+            <img class="tj" src="./5.png" alt="">
+            <div class="item-hader">
+                <div class="item-logo">
+                    <img src="./1.png" alt="">
+                </div>
+                <div class="item-info">
+                    <div class="first">
+                        融易分期
+                    </div>
+                    <div class="last">
+                        低息信用贷
+                    </div>
+                </div>
+                <div class="item-click">
+                    立即申请
+                </div>
+            </div>
+            <div class="footer">
+                <div class="start">
+                    <div class="t">2-10万</div>
+                    <div class="f">可借额度(元)</div>
+                </div>
+                <div class="middle">
+                    <div class="t">0.9%</div>
+                    <div class="f">参考利率(月)</div>
+                </div>
+                <div class="end">
+                    <div class="t">3-24</div>
+                    <div class="f">期限(月)</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img class="tj" src="./7.png" alt="">
+            <div class="item-hader">
+                <div class="item-logo">
+                    <img src="./1.png" alt="">
+                </div>
+                <div class="item-info">
+                    <div class="first">
+                        融易分期
+                    </div>
+                    <div class="last">
+                        低息信用贷
+                    </div>
+                </div>
+                <div class="item-click">
+                    立即申请
+                </div>
+            </div>
+            <div class="footer">
+                <div class="start">
+                    <div class="t">2-10万</div>
+                    <div class="f">可借额度(元)</div>
+                </div>
+                <div class="middle">
+                    <div class="t">0.9%</div>
+                    <div class="f">参考利率(月)</div>
+                </div>
+                <div class="end">
+                    <div class="t">3-24</div>
+                    <div class="f">期限(月)</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img class="tj" src="./5.png" alt="">
+            <div class="item-hader">
+                <div class="item-logo">
+                    <img src="./1.png" alt="">
+                </div>
+                <div class="item-info">
+                    <div class="first">
+                        融易分期
+                    </div>
+                    <div class="last">
+                        低息信用贷
+                    </div>
+                </div>
+                <div class="item-click">
+                    立即申请
+                </div>
+            </div>
+            <div class="footer">
+                <div class="start">
+                    <div class="t">2-10万</div>
+                    <div class="f">可借额度(元)</div>
+                </div>
+                <div class="middle">
+                    <div class="t">0.9%</div>
+                    <div class="f">参考利率(月)</div>
+                </div>
+                <div class="end">
+                    <div class="t">3-24</div>
+                    <div class="f">期限(月)</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img class="tj" src="./7.png" alt="">
+            <div class="item-hader">
+                <div class="item-logo">
+                    <img src="./1.png" alt="">
+                </div>
+                <div class="item-info">
+                    <div class="first">
+                        融易分期
+                    </div>
+                    <div class="last">
+                        低息信用贷
+                    </div>
+                </div>
+                <div class="item-click">
+                    立即申请
+                </div>
+            </div>
+            <div class="footer">
+                <div class="start">
+                    <div class="t">2-10万</div>
+                    <div class="f">可借额度(元)</div>
+                </div>
+                <div class="middle">
+                    <div class="t">0.9%</div>
+                    <div class="f">参考利率(月)</div>
+                </div>
+                <div class="end">
+                    <div class="t">3-24</div>
+                    <div class="f">期限(月)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
