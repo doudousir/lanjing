@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蓝鲸</title>
+    <script>
+        function window_width() {
+            const clientWidth = document.documentElement.getBoundingClientRect().width
+            const width = clientWidth > 750 ? 750 : clientWidth
+            document.documentElement.style.fontSize = `${width / 7.5}px`
+        }
+        window_width()
+        window.addEventListener('resize', () => window_width(), false);
+        window.onload = () => {
+            let lastTouchEnd = 0
+            document.addEventListener('dblclick', event => event.preventDefault())
+            document.addEventListener('gesturestart', event => event.preventDefault())
+            document.addEventListener('touchstart', event => event.touches.length > 1 && event.preventDefault())
+            document.addEventListener('touchend', event => {
+                const now = new Date().getTime()
+                now - lastTouchEnd <= 300 && event.preventDefault()
+                lastTouchEnd = now
+            }, false)
+        }
+    </script>
+    <style>
+        html,
+        body,
+        ul,
+        li,
+        img,
+        a,
+        p,
+        div,
+        form,
+        input {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino", STHeiti, "Microsoft YaHei", sans-serif;
+        }
+        @font-face {
+            font-family: "Yuppy-Sc";
+            src: url('font_yuppy_sc/webfont.eot');
+            src: url('font_yuppy_sc/webfont.eot?#iefix') format('embedded-opentype'),
+            url('font_yuppy_sc/webfont.woff') format('woff'),
+            url('font_yuppy_sc/webfont.ttf') format('truetype'),
+            url('font_yuppy_sc/webfont.svg#webfont') format('svg');
+        }
+        body {
+            background-color: #fff;
+        }
+        header {
+            height: 5.2rem;
+            padding: .4rem;
+            z-index: 99;
+            box-sizing: border-box;
+            background-color: #3874F6;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+        }
+        header .title {
+            display: flex;
+        }
+        header .title .logo {
+            width: 1.2rem;
+            height: 1.2rem;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        header .title .desc {
+            color: #fff;
+            font-size: .4rem;
+            width: calc(100% - 1.2rem);
+            display: flex;
+            flex-wrap: wrap;
+            padding-left: 15px;
+        }
+        header .title .desc .font-yuppy-sc {
+            width: 100%;
+            line-height: 1.2;
+            font-family: 'Yuppy-Sc' !important;
+        }
+        header .title .desc .superiority {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            font-size: .2rem;
+        }
+        header .title .desc .superiority div {
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            font-family: SourceHanSansCN;
+        }
+        header .title .desc .superiority div img {
+            width: .3rem;
+            height: .31rem;
+            margin-right: 5px;
+        }
+        header .quota {
+            margin-top: .3rem;
+            color: #FEFEFE;
+        }
+        header .quota .tip {
+            font-size: .18rem;
+            font-family: SourceHanSansCN;
+            font-weight: 400;
+        }
+        header .quota .number span:first-child {
+            font-size: .4rem;
+            font-family: SourceHanSansCN;
+            font-weight: bold;
+        }
+        header .quota .number span:last-child {
+            font-size: 1rem;
+            font-family: DIN Alternate;
+            font-weight: bold;
+        }
+        .main {
+            padding-bottom: 20px;
+        }
+        .main .container {
+            width: 90%;
+            padding: 10px;
+            font-size: .3rem;
+            border-radius: 8px;
+            background: #FFFFFF;
+            margin: -1.7rem auto 0 auto;
+            box-shadow: 0px 0px 47px 0px rgba(0, 0, 0, 0.16);
+        }
+        .main .title {
+            position: relative;
+            font-family: SourceHanSansCN;
+            font-weight: bold;
+            padding-left: 8px;
+            height: 20px;
+        }
+        .main .title .line {
+            position: absolute;
+            width: 5px;
+            height: 90%;
+            left: 0;
+            top: 50%;
+            background-color: #3874F6;
+            transform: translate(-50%, -50%);
+        }
+        .main .desc {
+            margin-top: 15px;
+        }
+        .main .desc .item {
+            display: flex;
+            font-size: .2rem;
+            justify-content: space-between;
+            line-height: 25px;
+        }
+        
+        .main .desc .item div:first-child {
+            color: #949494;
+            font-family: SourceHanSansCN;
+            font-weight: 400;
+        }
+        .main .desc .item div:last-child {
+            color: #000;
+            font-family: SourceHanSansCN;
+        }
+        .main .advantage {
+            font-size: .2rem;
+            display: flex;
+            align-items: center;
+            margin-top: .2rem;
+            font-family: SourceHanSansCN;
+        }
+        .main .advantage .discount {
+            padding: 1px 8px;
+            color:#fff;
+            border-radius: 20px;
+            background-color: #3874F6;
+            font-family: SourceHanSansCN;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        .main .input {
+            margin-top: 10px;
+        }
+        .main .input input {
+            outline: none;
+            border: none;
+            width: 100%;
+            height: .8rem;
+            background: #F8F8F8;
+            padding-left: 15px;
+        }
+        .main .input input::placeholder {
+            font-family: SourceHanSansCN;
+            font-weight: 400;
+            color: #B8B8B8;
+        }
+        .main .estimate {
+            font-size: .2rem;
+            margin-top: 10px;
+            font-family: SourceHanSansCN;
+            font-weight: 400;
+            color: #000000;
+        }
+        .main .button {
+            background-color: #3874F6;
+            width: 100%;
+            height: .9rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #FFFEFE;
+            box-shadow: 0px 9px 13px 0px rgba(61, 76, 218, 0.49);
+            font-family: SourceHanSansCN;
+            font-weight: 400;
+            margin-top: 10px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+        }
+        .main .agreement {
+            margin-top: 20px;
+            font-size: .2rem;
+            font-family: SourceHanSansCN;
+            font-weight: 400;
+            color: #4C4C4C;
+            display: flex;
+        }
+        .main .agreement .checkbox {
+            margin-right: 5px;
+            padding-top: 2px;
+        }
+        .main .agreement span {
+            font-family: SourceHanSansCN;
+            font-weight: 400;
+            color: #3874F6;
+        }
+        .footer {
+            border-top: 8px solid #F8F8F8;
+        }
+        .footer img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="title">
+            <div class="logo"></div>
+            <div class="desc">
+                <div class="font-yuppy-sc">贷款，就用鲸优享</div>
+                <div class="superiority">
+                    <div>
+                        <img src="./images/16.png" />
+                        产品低息
+                    </div>
+                    <div>
+                        <img src="./images/14.png" />
+                        下款神速
+                    </div>
+                    <div>
+                        <img src="./images/15.png" />
+                        额度更高
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="quota">
+            <div class="tip">最高可借金额(元)</div>
+            <div class="number">
+                <span>¥</span>
+                <span>200,000</span>
+            </div>
+        </div>
+    </header>
+    <div class="main">
+        <div class="container">
+            <div class="title">
+                <div class="line"></div>
+                 产品详情
+            </div>
+            <div class="desc">
+                <div class="item">
+                    <div>
+                        最低日息
+                    </div>
+                    <div>
+                        <span style="color: #3874F6;">0.02%</span>
+                        <span>(10000元借1天最低利息2元)</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        最高额度
+                    </div>
+                    <div>
+                        最高可借¥200,000元
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        借款期限
+                    </div>
+                    <div>
+                        分3/6/12/36/60期
+                    </div>
+                </div>
+            </div>
+            <div class="advantage">
+                <div class="discount">限时折扣</div>
+                <div>
+                    年利率9.8%&nbsp;(<span style="color: #FF7500;">04:48</span>后结束)
+                </div>
+            </div>
+            <div class="input">
+                <input type="text" placeholder="请输入手机号码(已加密)" />
+            </div>
+            <div class="estimate">
+                当前预估额度为: <span style="color: #FF7500;">***80.00</span>元
+            </div>
+            <div class="button">
+                查看我的额度
+            </div>
+            <div class="agreement">
+                <div class="checkbox">
+                    <input type="checkbox" checked>
+                </div>
+                <div>
+                    我已阅读并同意 <span>《用户授权书》</span><span>《信息授权告知书》</span><span>《第三方产品风险知情书及免责协议》</span><span>《隐私政策》</span><span>《用户服务协议》</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <img src="./images/17.png" />
+    </div>
+</body>
+
+</html>
