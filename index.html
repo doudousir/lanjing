@@ -6,49 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>蓝鲸</title>
-    <script>function window_width() {
-            var r = document.documentElement;
-            var a = r.getBoundingClientRect().width;
-            if (a > 750) {
-                a = 750;
-            }
-            rem = a / 7.5;
-            r.style.fontSize = rem + "px";
+    <script src="http://cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
+    <script src="./js/CountUp.js"></script>
+    <script>
+        function window_width() {
+            const clientWidth = document.documentElement.getBoundingClientRect().width
+            const width = clientWidth > 750 ? 750 : clientWidth
+            document.documentElement.style.fontSize = `${width / 7.5}px`
         }
-        window_width();
-        // 监听屏幕实时变化改变rem大小
-        window.addEventListener(
-            "resize",
-            function () {
-                window_width();
-            },
-            false
-        );
-        window.onload = function () {
-            var lastTouchEnd = 0;
-            document.addEventListener("touchstart", function (event) {
-                if (event.touches.length > 1) {
-                    event.preventDefault();
-                }
-            });
-            document.addEventListener(
-                "touchend",
-                function (event) {
-                    var now = new Date().getTime();
-                    if (now - lastTouchEnd <= 300) {
-                        event.preventDefault();
-                    }
-                    lastTouchEnd = now;
-                },
-                false
-            );
-            document.addEventListener("gesturestart", function (event) {
-                event.preventDefault();
-            });
-            document.addEventListener("dblclick", function (event) {
-                event.preventDefault();
-            });
-        };</script>
+        window_width()
+        window.addEventListener('resize', () => window_width(), false);
+        window.onload = () => {
+            let lastTouchEnd = 0
+            document.addEventListener('dblclick', event => event.preventDefault())
+            document.addEventListener('gesturestart', event => event.preventDefault())
+            document.addEventListener('touchstart', event => event.touches.length > 1 && event.preventDefault())
+            document.addEventListener('touchend', event => {
+                const now = new Date().getTime()
+                now - lastTouchEnd <= 300 && event.preventDefault()
+                lastTouchEnd = now
+            }, false)
+        }
+    </script>
     <style>
         html,
         body,
@@ -404,7 +383,7 @@
             font-family: DINPro;
             position: absolute;
             bottom: 1.4rem;
-            left: 1.7rem;
+            left: 2.2rem;
         }
 
         .mt-number-animate {
@@ -433,22 +412,23 @@
             background-repeat: no-repeat;
         }
     </style>
-    <script src="http://cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
-    <script src="./js/numberAnimate.js"></script>
-
     <script>
         $(function () {
-            $('.numberAnimate').numberAnimate({
-                num: '85000',
-                speed: 1500
-            });
+            new CountUp('num', 0, 85000, 0, 1, {
+                useEasing: true,
+                useGrouping: true,
+                separator: '',
+                decimal: '.',
+                prefix: '',
+                suffix: ''
+            }).start()
         })
     </script>
 </head>
 
 <body>
     <div class="container">
-        <div class="numberAnimate"></div>
+        <div id="num" class="numberAnimate"></div>
     </div>
     <!-- <div class="header">
         <div class="logo">

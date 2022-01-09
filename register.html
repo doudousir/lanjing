@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>蓝鲸</title>
+    <script src="http://cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
+    <script src="./js/CountUp.js"></script>
     <script>
         function window_width() {
             const clientWidth = document.documentElement.getBoundingClientRect().width
@@ -26,6 +28,18 @@
             }, false)
         }
     </script>
+    <script>
+        $(function () {
+            new CountUp('num', 0, 200000, 0, 1, {
+                useEasing: true,
+                useGrouping: true,
+                separator: ',',
+                decimal: '.',
+                prefix: '',
+                suffix: ''
+            }).start()
+        })
+    </script>
     <style>
         html,
         body,
@@ -43,17 +57,41 @@
             -webkit-tap-highlight-color: transparent;
             font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino", STHeiti, "Microsoft YaHei", sans-serif;
         }
+
+        @font-face {
+            font-family: DINAlternate;
+            src: url("font/DIN-Alternate-Bold.ttf");
+        }
+
         @font-face {
             font-family: "Yuppy-Sc";
             src: url('font_yuppy_sc/webfont.eot');
             src: url('font_yuppy_sc/webfont.eot?#iefix') format('embedded-opentype'),
-            url('font_yuppy_sc/webfont.woff') format('woff'),
-            url('font_yuppy_sc/webfont.ttf') format('truetype'),
-            url('font_yuppy_sc/webfont.svg#webfont') format('svg');
+                url('font_yuppy_sc/webfont.woff') format('woff'),
+                url('font_yuppy_sc/webfont.ttf') format('truetype'),
+                url('font_yuppy_sc/webfont.svg#webfont') format('svg');
         }
+
+        @font-face {
+            font-family: "font_bold";
+            font-display: swap;
+            src: url('font_bold/webfont.eot');
+            src: url('font_bold/webfont.eot?#iefix') format('embedded-opentype'),
+                url('font_bold/webfont.woff2') format('woff2'),
+                url('font_bold/webfont.woff') format('woff'),
+                url('font_bold/webfont.ttf') format('truetype'),
+                url('font_bold/webfont.svg#webfont') format('svg');
+        }
+
+
+        html {
+            background-color: #F8F8F8;
+        }
+
         body {
             background-color: #fff;
         }
+
         header {
             height: 5.2rem;
             padding: .4rem;
@@ -63,131 +101,159 @@
             border-bottom-left-radius: 25px;
             border-bottom-right-radius: 25px;
         }
+
         header .title {
             display: flex;
         }
+
         header .title .logo {
-            width: 1.2rem;
-            height: 1.2rem;
+            width: 1rem;
+            height: 1rem;
             background-color: #fff;
             border-radius: 5px;
         }
+
         header .title .desc {
             color: #fff;
-            font-size: .4rem;
+            font-size: .35rem;
             width: calc(100% - 1.2rem);
             display: flex;
             flex-wrap: wrap;
             padding-left: 15px;
         }
+
         header .title .desc .font-yuppy-sc {
             width: 100%;
             line-height: 1.2;
             font-family: 'Yuppy-Sc' !important;
         }
+
         header .title .desc .superiority {
             width: 100%;
             display: flex;
             align-items: center;
-            font-size: .2rem;
+            font-size: .23rem;
         }
+
         header .title .desc .superiority div {
             margin-right: 10px;
             display: flex;
             align-items: center;
-            font-family: SourceHanSansCN;
+            font-family: font_bold;
         }
+
         header .title .desc .superiority div img {
             width: .3rem;
             height: .31rem;
             margin-right: 5px;
         }
+
         header .quota {
-            margin-top: .3rem;
+            margin-top: .23rem;
             color: #FEFEFE;
         }
+
         header .quota .tip {
-            font-size: .18rem;
-            font-family: SourceHanSansCN;
+            font-size: .23rem;
+            font-family: font_bold;
             font-weight: 400;
         }
+
         header .quota .number span:first-child {
-            font-size: .4rem;
-            font-family: SourceHanSansCN;
+            font-size: .55rem;
+            font-family: DINAlternate;
             font-weight: bold;
         }
+
         header .quota .number span:last-child {
             font-size: 1rem;
-            font-family: DIN Alternate;
+            font-family: DINAlternate;
             font-weight: bold;
+            letter-spacing: 1px;
         }
+
         .main {
             padding-bottom: 20px;
         }
+
         .main .container {
             width: 90%;
             padding: 10px;
             font-size: .3rem;
             border-radius: 8px;
             background: #FFFFFF;
-            margin: -1.7rem auto 0 auto;
+            margin: -1.9rem auto 0 auto;
             box-shadow: 0px 0px 47px 0px rgba(0, 0, 0, 0.16);
         }
+
         .main .title {
             position: relative;
-            font-family: SourceHanSansCN;
+            font-family: font_bold;
             font-weight: bold;
-            padding-left: 8px;
+            padding-left: 4px;
             height: 20px;
+            display: flex;
+            align-items: center;
         }
+
         .main .title .line {
             position: absolute;
             width: 5px;
             height: 90%;
             left: 0;
             top: 50%;
+            border-radius: 20px;
             background-color: #3874F6;
             transform: translate(-50%, -50%);
         }
+
         .main .desc {
             margin-top: 15px;
         }
+
         .main .desc .item {
             display: flex;
-            font-size: .2rem;
+            font-size: .23rem;
             justify-content: space-between;
-            line-height: 25px;
+            line-height: 30px;
         }
-        
+
         .main .desc .item div:first-child {
             color: #949494;
-            font-family: SourceHanSansCN;
+            font-family: font_bold;
             font-weight: 400;
         }
+
         .main .desc .item div:last-child {
             color: #000;
-            font-family: SourceHanSansCN;
+            font-family: font_bold;
         }
+
         .main .advantage {
-            font-size: .2rem;
+            font-size: .23rem;
             display: flex;
             align-items: center;
             margin-top: .2rem;
-            font-family: SourceHanSansCN;
+            font-family: font_bold;
         }
+
         .main .advantage .discount {
             padding: 1px 8px;
-            color:#fff;
+            color: #fff;
             border-radius: 20px;
             background-color: #3874F6;
-            font-family: SourceHanSansCN;
+            font-family: font_bold;
             font-weight: bold;
             margin-right: 8px;
         }
+
         .main .input {
             margin-top: 10px;
+            font-size: .23rem;
         }
+
         .main .input input {
+            font-size: .23rem;
             outline: none;
             border: none;
             width: 100%;
@@ -195,18 +261,22 @@
             background: #F8F8F8;
             padding-left: 15px;
         }
+
         .main .input input::placeholder {
-            font-family: SourceHanSansCN;
+            font-family: font_bold;
             font-weight: 400;
             color: #B8B8B8;
+            font-size: .23rem;
         }
+
         .main .estimate {
-            font-size: .2rem;
+            font-size: .23rem;
             margin-top: 10px;
-            font-family: SourceHanSansCN;
+            font-family: font_bold;
             font-weight: 400;
             color: #000000;
         }
+
         .main .button {
             background-color: #3874F6;
             width: 100%;
@@ -216,32 +286,53 @@
             align-items: center;
             color: #FFFEFE;
             box-shadow: 0px 9px 13px 0px rgba(61, 76, 218, 0.49);
-            font-family: SourceHanSansCN;
+            font-family: font_bold;
             font-weight: 400;
             margin-top: 10px;
             border-radius: 20px;
             letter-spacing: 1px;
         }
+
         .main .agreement {
             margin-top: 20px;
-            font-size: .2rem;
-            font-family: SourceHanSansCN;
+            font-size: .23rem;
+            font-family: font_bold;
             font-weight: 400;
             color: #4C4C4C;
             display: flex;
         }
+
         .main .agreement .checkbox {
             margin-right: 5px;
             padding-top: 2px;
         }
+
+        .main .agreement .checkbox input[type="checkbox"] {
+            -webkit-appearance: none;
+            background: #fff url(./images/20.png) no-repeat;
+            background-size: cover;
+            height: 13px;
+            width: 13px;
+            vertical-align: middle;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .main .agreement .checkbox input[type="checkbox"]:checked {
+            background-position: -29px 0px;
+        }
+
         .main .agreement span {
-            font-family: SourceHanSansCN;
+            font-family: font_bold;
             font-weight: 400;
             color: #3874F6;
         }
+
+
         .footer {
             border-top: 8px solid #F8F8F8;
         }
+
         .footer img {
             display: block;
             width: 100%;
@@ -268,7 +359,7 @@
                     <div>
                         <img src="./images/15.png" />
                         额度更高
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -276,7 +367,7 @@
             <div class="tip">最高可借金额(元)</div>
             <div class="number">
                 <span>¥</span>
-                <span>200,000</span>
+                <span id="num">200000</span>
             </div>
         </div>
     </header>
@@ -333,7 +424,8 @@
                     <input type="checkbox" checked>
                 </div>
                 <div>
-                    我已阅读并同意 <span>《用户授权书》</span><span>《信息授权告知书》</span><span>《第三方产品风险知情书及免责协议》</span><span>《隐私政策》</span><span>《用户服务协议》</span>
+                    我已阅读并同意
+                    <span>《用户授权书》</span><span>《信息授权告知书》</span><span>《第三方产品风险知情书及免责协议》</span><span>《隐私政策》</span><span>《用户服务协议》</span>
                 </div>
             </div>
         </div>
