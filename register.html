@@ -38,6 +38,15 @@
                 prefix: '',
                 suffix: ''
             }).start()
+
+
+            const countDown = second => `${`00${Math.floor(second / 60)}`.slice(-2)}:${`00${second % 60}`.slice(-2)}`
+            let time = 3 * 60
+            $('#count_down').text(countDown(time--))
+            const timer = setInterval(() => {
+                $('#count_down').text(countDown(time--))
+                time < 0 && clearInterval(timer)
+            }, 1000)
         })
     </script>
     <style>
@@ -409,7 +418,7 @@
             <div class="advantage">
                 <div class="discount">限时折扣</div>
                 <div>
-                    年利率9.8%&nbsp;(<span style="color: #FF7500;">04:48</span>后结束)
+                    年利率9.8%&nbsp;(<span style="color: #FF7500;" id="count_down">04:48</span>后结束)
                 </div>
             </div>
             <div class="input">
